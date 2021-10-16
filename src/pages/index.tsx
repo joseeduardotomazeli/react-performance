@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useCallback } from 'react';
 
 import ProductResultsProps from '../components/ProductResults';
 
@@ -17,6 +17,10 @@ function Home() {
     setResults(data);
   }
 
+  const addToWishlist = useCallback((id: number) => {
+    console.log(id);
+  }, []);
+
   return (
     <>
       <h1>React Performance</h1>
@@ -31,7 +35,7 @@ function Home() {
         <button type="submit">Buscar</button>
       </form>
 
-      <ProductResultsProps results={results} />
+      <ProductResultsProps results={results} onAddToWishlist={addToWishlist} />
     </>
   );
 }

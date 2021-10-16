@@ -10,10 +10,11 @@ interface Product {
 
 interface ProductResultsProps {
   results: Product[];
+  onAddToWishlist: (id: number) => void;
 }
 
 function ProductResults(props: ProductResultsProps) {
-  const { results } = props;
+  const { results, onAddToWishlist } = props;
 
   const totalPrice = useMemo(() => {
     return results.reduce((acc, product) => {
@@ -26,7 +27,11 @@ function ProductResults(props: ProductResultsProps) {
       <h2>{totalPrice}</h2>
 
       {results.map((product) => (
-        <ProductItem key={product.id} product={product} />
+        <ProductItem
+          key={product.id}
+          product={product}
+          onAddToWishlist={onAddToWishlist}
+        />
       ))}
     </div>
   );

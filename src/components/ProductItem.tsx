@@ -8,16 +8,20 @@ interface Product {
 
 interface ProductItemProps {
   product: Product;
+  onAddToWishlist: (id: number) => void;
 }
 
 function ProductItemComponent(props: ProductItemProps) {
   console.log('ProductItemComponent');
 
-  const { product } = props;
+  const { product, onAddToWishlist } = props;
 
   return (
     <div>
       {product.title} - <strong>{product.price}</strong>
+      <button onClick={() => onAddToWishlist(product.id)}>
+        Add to wishlist
+      </button>
     </div>
   );
 }
