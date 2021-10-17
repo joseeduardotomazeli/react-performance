@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { List, ListRowRenderer } from 'react-virtualized';
 
 import ProductItem from './ProductItem';
 
@@ -17,6 +18,18 @@ interface ProductResultsProps {
 function ProductResults(props: ProductResultsProps) {
   const { results, onAddToWishlist } = props;
 
+  const rowRender: ListRowRenderer = ({ index, key, style }) => {
+    return (
+      <div key={key} style={style}>
+        <ProductItem
+          key={key}
+          product={results[index]}
+          onAddToWishlist={onAddToWishlist}
+        />
+      </div>
+    );
+  };
+
   const totalPrice = useMemo(() => {
     return results.reduce((acc, product) => {
       return acc + product.price;
@@ -27,13 +40,14 @@ function ProductResults(props: ProductResultsProps) {
     <div>
       <h2>{totalPrice}</h2>
 
-      {results.map((product) => (
-        <ProductItem
-          key={product.id}
-          product={product}
-          onAddToWishlist={onAddToWishlist}
-        />
-      ))}
+      <List
+        width={900}
+        height={300}
+        rowHeight={25}
+        overscanRowCount={5}
+        rowCount={results.length}
+        rowRenderer={rowRender}
+      />
     </div>
   );
 }
