@@ -14,7 +14,27 @@ function Home() {
     const response = await fetch(`http://localhost:3333/products?q=${search}`);
     const data = await response.json();
 
-    setResults(data);
+    const formatter = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    });
+
+    const products = data.map((product) => {
+      return {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        priceFormatted: formatter.format(product.price),
+      };
+    });
+
+    // const totalPrice = useMemo(() => {
+    //   return results.reduce((acc, product) => {
+    //     return acc + product.price;
+    //   }, 0);
+    // }, [results]);
+
+    setResults(products);
   }
 
   const addToWishlist = useCallback((id: number) => {
