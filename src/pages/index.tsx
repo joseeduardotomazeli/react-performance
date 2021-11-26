@@ -1,6 +1,6 @@
-import { useState, FormEvent, useCallback } from 'react';
+import { useState, useCallback, FormEvent } from 'react';
 
-import ProductResultsProps from '../components/ProductResults';
+import ProductResults from '../components/ProductResults';
 
 function Home() {
   const [search, setSearch] = useState('');
@@ -55,7 +55,7 @@ function Home() {
         <button type="submit">Buscar</button>
       </form>
 
-      <ProductResultsProps results={results} onAddToWishlist={addToWishlist} />
+      <ProductResults results={results} onAddToWishlist={addToWishlist} />
     </>
   );
 }

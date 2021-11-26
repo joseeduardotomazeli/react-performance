@@ -18,7 +18,9 @@ interface ProductResultsProps {
 function ProductResults(props: ProductResultsProps) {
   const { results, onAddToWishlist } = props;
 
-  const rowRender: ListRowRenderer = ({ index, key, style }) => {
+  const rowRender: ListRowRenderer = (props) => {
+    const { index, key, style } = props;
+
     return (
       <div key={key} style={style}>
         <ProductItem

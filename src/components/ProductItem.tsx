@@ -26,9 +26,9 @@ interface ProductItemProps {
 function ProductItemComponent(props: ProductItemProps) {
   const [isAddingToWishlist, setIsAddingToWishlist] = useState(false);
 
-  console.log('ProductItemComponent');
-
   const { product, onAddToWishlist } = props;
+
+  console.log('ProductItemComponent');
 
   return (
     <div>
